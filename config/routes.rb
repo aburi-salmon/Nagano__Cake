@@ -23,5 +23,5 @@ Rails.application.routes.draw do
     resources :genres, only: [:index, :create, :edit, :update]
   end
   devise_for :members
-  devise_for :admins
+  #evise_for :admins
 end
