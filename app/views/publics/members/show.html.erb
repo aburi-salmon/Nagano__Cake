@@ -1,0 +1,12 @@
+<h2>マイページ</h2>
+登録情報　
+<%= link_to '編集する', edit_member_path(current_member) %><br>
+氏名:<%= @member.last_name %>　<%= @member.first_name %><br>
+カナ:<%= @member.kana_last_name %>　<%= @member.kana_first_name %><br>
+郵便番号:<%= @member.postal_code %><br>
+住所:<%= @member.address %><br>
+電話番号<%= @member.phone_number %><br>
+メールアドレス<%= @member.email %><br>
+
+配送先:<%= link_to '一覧を見る' %><br>
+注文履歴:<%= link_to '一覧を見る' %><br>
