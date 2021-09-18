@@ -1,11 +1,18 @@
 Rails.application.routes.draw do
+  devise_for :admins, controllers: {
+    sessions:      'admins/sessions',
+    passwords:     'admins/passwords',
+    registrations: 'admins/registrations'
+  }
+  
   devise_for :members, controllers: {
     sessions:      'publics/sessions',
     passwords:     'publics/passwords',
     registrations: 'publics/registrations'
   }
-  root to: 'homes#top'
-  get 'about' => 'homes#about'
+  
+  root to: 'public/homes#top'
+  get 'about' => 'public/homes#about'
   get 'search' => 'searches#search'
   get 'members/confirm' => 'members#confirm'
   patch 'menbers/withdraw' => 'members#withdraw'
@@ -19,7 +26,6 @@ Rails.application.routes.draw do
   end
   resources :orders, only: [:new, :create, :index, :show]
   namespace :admin do
-    root to: 'homes#top'
     resources :members, only: [:index, :edit, :update, :show]
     resources :products, except: [:destroy]
     resources :orders, only: [:show, :update] do
@@ -27,6 +33,4 @@ Rails.application.routes.draw do
     end
     resources :genres, only: [:index, :create, :edit, :update]
   end
-  
-  #devise_for :admins
 end
