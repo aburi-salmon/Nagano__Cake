@@ -25,6 +25,7 @@ Rails.application.routes.draw do
     resources :cart_items, only: [:index, :create, :destroy, :edit]
   end
   resources :orders, only: [:new, :create, :index, :show]
+  end
   namespace :admin do
     resources :members, only: [:index, :edit, :update, :show]
     resources :products, except: [:destroy]
