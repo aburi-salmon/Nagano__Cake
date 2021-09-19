@@ -1,9 +1,9 @@
-class Public::HomesController < ApplicationController
-    
+class Publics::HomesController < ApplicationController
+
     def top
     end
-    
+
     def about
     end
-    
+
 end
