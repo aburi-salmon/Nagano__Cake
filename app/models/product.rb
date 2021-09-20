@@ -1,5 +1,6 @@
 class Product < ApplicationRecord
   has_many :genres
+  has_many :cart_items
   # has_many :member_choice_products, through: :genres, source: :member
   attachment :image
   validates :ex_unit_price, presence: true

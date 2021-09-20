@@ -1,0 +1,40 @@
+<div class='container'>
+  <div class='row'>
+    <div class='mx-auto text-center'>
+
+      <h3>ショッピングカート</h3>
+
+      <div>
+        <table class='table'>
+          <thead>
+            <tr>
+              <th>商品名</th>
+              <th>単価(税込)</th>
+              <th>数量</th>
+              <th>小計</th>
+              <th></th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @cart_items.each do |cart_item| %>
+            <tr>
+              <td><%= cart_item.product.name %></td>
+              <td><%= (cart_item.product.ex_unit_price*1.1).floor %></td>
+              <td>
+                <%= form_for(cart_item) do |f| %>
+                  <%= f.namber_field :quantity, min:1, style: "width: 50%" %>
+                  <%= f.submit '変更', class: 'btn' %>
+                <% end %>
+              </td>
+              <td></td>
+              <td><%=link_to '削除する', cart_items_path(cart_item.id), method: :delete, calss: 'btn' %></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>
