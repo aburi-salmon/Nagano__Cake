@@ -1,37 +1,31 @@
-<div class='container px-5 px-sm-0'>
+<table border="1" width="150">
+  <tr align="center">
+    <th>ジャンル検索</th>
+  </tr>
+  <tr>
+    <td>
+      <% @genres.each do |genre| %>
+        <%= genre.name %><br />
+      <% end %>
+    </td>
+  </tr>
+</table>
+<div class='container px-1 px-md-0'>
   <div class='row'>
-    <div class='col-md-3'>
-      <h2>商品一覧（全<%#= @products.id.count %>件）</h2>
-      <table class='table table-hover table-inverse'>
-        <thead>
-          <tr>
-            <th>商品ID</th>
-            <th>商品名</th>
-            <th>税抜価格</th>
-            <th>ジャンル</th>
-            <th>ステータス</th>
-            <th colspan="5"></th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @products.each do |product| %>
-            <tr id="product_<%= product.id %>">
-              <td><%= product.id %></td>
-              <td><%= link_to product.name, products_path(product.id), class: "product_#{product.id}" %></td>
-              <td><%= product.ex_unit_price %></td>
-              <td><%#= @genre.name %></td>
-              <!--ジャンル名を表示させたいのにジャンル表示される-->
-              <td>
-                <% if product.is_active == true %>
-                  <p>販売中</p>
-                <% elsif product.is_active == false %>
-                  <p>販売停止中</p>
-                <% end %>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
+  <div class='col-md-4'>
+  <span style="font-size:30px">商品一覧</span>
+  <span style="font-size:20px">（全<%= @products.count %>件）</span>
+  <p></p>
+  </div>
+  </div>
+  <div class='row'>
+    <% @products.each do |product| %>
+      <div class='col-md-4'>
+        <p><%= attachment_image_tag product, :image, size: "200x200", fallback: "no_image_logo.png" %></p>
+        <p><%= link_to product.name, product_path(product.id), class: "product_#{product.id}" %></p>
+        <p>¥<%= product.add_tax_price.to_s(:delimited) %></p>
+      </div>
+    <% end %>
   </div>
 </div>
+<%= paginate @products %>

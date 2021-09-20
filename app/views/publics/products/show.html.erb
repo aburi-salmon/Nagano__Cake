@@ -1,34 +1,34 @@
 <h2>商品詳細</h2>
-<div class="container">
-  <%= attachment_image_tag @product, :image, size: "200x200", fallback: "no_image_logo.png" %>
-  <div class="row">
-    <div class="col">
-      <%= "商品名" %>
-      <%= @product.name  %>
-    </div>
-    <div class="col">
-      <%= "商品説明" %>
-      <%= @product.description %>
-    </div>
-    <div class="col">
-      <%= "ジャンル" %>
-      <%#= @genre.name %>
-    </div>
-    <div class="col">
-      <%= "税込価格" %>
-      <%= "(税抜価格)" %>
-      <%= @product.add_tax_price.to_s(:delimited)  %>（<%= @product.ex_unit_price.to_s(:delimited)  %>）円
-    </div>
-    <div class="col">
-      <%= "販売ステータス" %>
-      <% if @product.is_active == true %>
-        販売中
-      <% elsif @product.is_active == false %>
-        販売停止中
+<table border="1" width="150">
+  <tr align="center">
+    <th>ジャンル検索</th>
+  </tr>
+  <tr>
+    <td>
+      <% @genres.each do |genre| %>
+        <%= genre.name %><br />
       <% end %>
+    </td>
+  </tr>
+</table>
+<div class='container px-1 px-md-0'>
+<div class='row'>
+    <div class='col-md-4'>
+      <%= attachment_image_tag @product, :image, size: "200x200", fallback: "no_image_logo.png" %>
     </div>
-      <%#= link_to "編集する", edit_admin_product_path(@product), class: 'btn btn-success' %>
-
+    <div class='col-md-4'>
+      <h3>
+        <%= @product.name  %>
+      </h3>
+      <p>
+        <%= @product.description %>
+      </p>
+      <h5>
+        ￥<%= @product.add_tax_price.to_s(:delimited)  %><span style="font-size:10px">（税込）</span>
+      </h5>
+      <%= "個数選択" %>
+      <%= "カートに入れる" %>
+    </div>
       <%= form_for @cart_item, url: cart_items_path(@cart_item) do |f| %>
         <%= f.hidden_field :product_id, :value => @product.id %>
         <%= f.number_field :quantity, placeholder: '個数選択',class: 'btn btn-default',min: 1 %>

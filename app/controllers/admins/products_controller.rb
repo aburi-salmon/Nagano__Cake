@@ -1,7 +1,7 @@
 class Admins::ProductsController < ApplicationController
   before_action :set_genres, only:[:index, :new, :show, :edit, :create, :update]
   def index
-    @products = Product.all
+    @products = Product.page(params[:page])
   end
 
   def new
@@ -10,8 +10,11 @@ class Admins::ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_params)
-    @product.save
-    redirect_to admins_products_path
+    if @product.save
+      redirect_to admins_products_path
+    else
+      render :new
+    end
   end
 
   def show
@@ -22,8 +25,11 @@ class Admins::ProductsController < ApplicationController
 
   def update
     @product = Product.find(params[:id])
-    @product.update(product_params)
-    redirect_to admin_product_path(@product)
+    if @product.update(product_params)
+      redirect_to admins_product_path(@product)
+    else
+      render :edit
+    end
   end
 
   def edit

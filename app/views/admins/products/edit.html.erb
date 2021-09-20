@@ -1,3 +1,7 @@
+<% if @product.errors.any? %>
+  <%= @product.errors.count %>件のエラーが発生しました<br/>
+　商品価格は入力必須です
+<% end %>
 <h2>商品編集</h2>
 <div class="container">
   <div class="row">
