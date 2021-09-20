@@ -17,7 +17,7 @@
           <% @products.each do |product| %>
             <tr id="product_<%= product.id %>">
               <td><%= product.id %></td>
-              <td><%= link_to product.name, admin_product_path(product.id), class: "product_#{product.id}" %></td>
+              <td><%= link_to product.name, products_path(product.id), class: "product_#{product.id}" %></td>
               <td><%= product.ex_unit_price %></td>
               <td><%#= @genre.name %></td>
               <!--ジャンル名を表示させたいのにジャンル表示される-->
