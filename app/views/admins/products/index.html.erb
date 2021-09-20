@@ -1,37 +1,33 @@
-<div class='container px-5 px-sm-0'>
-  <div class='row'>
-    <div class='col-md-3'>
-      <h2>商品一覧</h2>
-      <table class='table table-hover table-inverse'>
-        <thead>
-          <tr>
-            <th>商品ID</th>
-            <th>商品名</th>
-            <th>税抜価格</th>
-            <th>ジャンル</th>
-            <th>ステータス</th>
-            <th colspan="5"></th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @products.each do |product| %>
-            <tr id="product_<%= product.id %>">
-              <td><%= product.id %></td>
-              <td><%= link_to product.name, admins_product_path(product.id), class: "product_#{product.id}" %></td>
-              <td><%= product.ex_unit_price %></td>
-              <td><%= @genres.name %></td>
-              <!--ジャンル名を表示させたいのにジャンル表示される-->
-              <td>
-                <% if product.is_active == true %>
-                  <p>販売中</p>
-                <% elsif product.is_active == false %>
-                  <p>販売停止中</p>
-                <% end %>
-              </td>
-            </tr>
+<h2>商品一覧</h2>
+<%= link_to "+", new_admins_product_path %>
+<table class='table table-hover table-inverse'>
+  <thead class='table-striped'>
+    <tr>
+      <th>商品ID</th>
+      <th>商品名</th>
+      <th>税抜価格</th>
+      <th>ジャンル</th>
+      <th>ステータス</th>
+      <th colspan="5"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @products.each do |product| %>
+      <tr id="product_<%= product.id %>">
+        <td><%= product.id %></td>
+        <td><%= link_to product.name, admins_product_path(product.id), class: "product_#{product.id}" %></td>
+        <td><%= product.ex_unit_price %></td>
+        <td><%= @genres.name %></td>
+        <!--ジャンル名を表示させたいのにジャンル表示される-->
+        <td>
+          <% if product.is_active == true %>
+            <p>販売中</p>
+          <% elsif product.is_active == false %>
+            <p>販売停止中</p>
           <% end %>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= paginate @products %>
