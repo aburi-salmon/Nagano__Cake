@@ -10,4 +10,9 @@ class Product < ApplicationRecord
   def add_tax_price
     (self.ex_unit_price * 1.08).round
   end
+
+  def taxin_price
+      ex_unit_price*1.1
+  end
+
 end
