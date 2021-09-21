@@ -1,31 +1,39 @@
-<table border="1" width="150">
-  <tr align="center">
-    <th>ジャンル検索</th>
-  </tr>
-  <tr>
-    <td>
-      <% @genres.each do |genre| %>
-        <%= genre.name %><br />
-      <% end %>
-    </td>
-  </tr>
-</table>
-<div class='container px-1 px-md-0'>
+<div class='container'>
   <div class='row'>
-  <div class='col-md-4'>
-  <span style="font-size:30px">商品一覧</span>
-  <span style="font-size:20px">（全<%= @products.count %>件）</span>
-  <p></p>
-  </div>
-  </div>
-  <div class='row'>
-    <% @products.each do |product| %>
-      <div class='col-md-4'>
-        <p><%= attachment_image_tag product, :image, size: "200x200", fallback: "no_image_logo.png" %></p>
-        <p><%= link_to product.name, product_path(product.id), class: "product_#{product.id}" %></p>
-        <p>¥<%= product.add_tax_price.to_s(:delimited) %></p>
+    <div class='col-md-3'>
+    <table border="1" width="150">
+      <tr align="center">
+        <th>ジャンル検索</th>
+      </tr>
+      <tr>
+        <td>
+          <% @genres.each do |genre| %>
+            <%= genre.name %><br />
+          <% end %>
+        </td>
+      </tr>
+    </table>
+    </div>
+    <div class='col-md-9'>
+      <div class='row'>
+        <div class='col-md-5'>
+        <span style="font-size:30px">商品一覧</span>
+        <span style="font-size:20px">（全<%= @product_all.count %>件）</span>
+        <p></p>
+        </div>
       </div>
-    <% end %>
+      <div class='row'>
+        <% @products.each do |product| %>
+          <div class='col-md-3'>
+            <p><%= attachment_image_tag product, :image, size: "200x200", fallback: "logo.png" %></p>
+            <p><%= link_to product.name, product_path(product.id), class: "product_#{product.id}" %></p>
+            <p>¥<%= product.add_tax_price.to_s(:delimited) %></p>
+          </div>
+        <% end %>
+      </div>
+      <ul class="pagination justify-content-center">
+        <%= paginate @products %>
+      </ul>
+    </div>
   </div>
 </div>
-<%= paginate @products %>

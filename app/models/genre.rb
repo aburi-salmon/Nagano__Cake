@@ -1,3 +1,3 @@
 class Genre < ApplicationRecord
-  belongs_to :products
+  has_many :products
 end

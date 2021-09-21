@@ -21,8 +21,8 @@
       <% @genres.each do |genre| %>
         <tr>
           <td><%= genre.name %></td>
-          <td class="btn btn-success">
-            <%= link_to "編集する", edit_admins_genre_path(genre), method: :get, local: true %>
+          <td>
+            <%= link_to "編集する", edit_admins_genre_path(genre), method: :get, local: true, class: "btn btn-success" %>
           </td>
         </tr>
       <% end %>

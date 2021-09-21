@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   get 'orders/complete' => 'orders#complete'
   resources :members, only: [:edit, :update, :show], module: :publics
   resources :addresses, only: [:index, :create, :edit, :update, :destroy]
-  resources :products, only: [:index, :show], module: :publics 
+  resources :products, only: [:index, :show], module: :publics
   resources :cart_items, only: [:index, :create, :destroy, :edit], module: :publics
   resources :orders, only: [:new, :create, :index, :show]
   namespace :admins do
