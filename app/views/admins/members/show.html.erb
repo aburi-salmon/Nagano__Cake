@@ -1,0 +1,15 @@
+<h6><%= @member.last_name %><%= @member.first_name %>さんの会員詳細</h6>
+会員ID:<%= @member.id %><br>
+氏名:<%= @member.last_name %>　<%= @member.first_name %><br>
+フリガナ:<%= @member.kana_last_name %>　<%= @member.kana_first_name %><br>
+郵便番号:<%= @member. postal_code %><br>
+住所:<%= @member.address %><br>
+電話番号:<%= @member.phone_number %><br>
+メールアドレス:<%= @member.email %><br>
+会員ステータス:<% if @member.is_deleted == true %>
+        無効
+      <% elsif @member.is_deleted == false %>
+        有効
+      <% end %><br>
+<%= link_to "編集する", edit_admins_member_path(@member.id) %>
+<%= link_to "注文履歴一覧を見る" %>
