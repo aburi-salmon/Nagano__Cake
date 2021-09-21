@@ -1,0 +1,28 @@
+<h5>会員一覧</h5>
+<table>
+  <thead>
+    <tr>
+      <th>会員ID</th>
+      <th>氏名</th>
+      <th>メールアドレス</th>
+      <th>ステータス</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @members.each do |member| %>
+    <tr>
+      <td><%= member.id %></td>
+      <td><%=link_to member.last_name + member.first_name, admins_member_path(member.id) %></td>
+      <td><%= member.email %></td>
+      <td><% if member.is_deleted == true %>
+        無効
+      <% elsif member.is_deleted == false %>
+        有効
+      <% end %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+ 
+ 
+</table>

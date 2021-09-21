@@ -11,7 +11,7 @@ class Admins::ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
     @product.save
-    redirect_to admins_products_path
+    redirect_to admin_products_path
   end
 
   def show
