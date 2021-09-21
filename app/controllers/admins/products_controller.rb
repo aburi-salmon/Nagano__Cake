@@ -21,7 +21,6 @@ class Admins::ProductsController < ApplicationController
   def show
     @product = Product.find(params[:id])
     @genre = Genre.find(@product.genre_id)
-    #@cart_item = CartItem.new
   end
 
   def update

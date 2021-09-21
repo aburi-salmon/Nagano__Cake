@@ -1,6 +1,7 @@
 class Product < ApplicationRecord
   belongs_to :genre
   has_many :cart_items
+  has_many :order_details
   # has_many :member_choice_products, through: :genres, source: :member
   attachment :image
   validates :ex_unit_price, presence: true
@@ -10,4 +11,9 @@ class Product < ApplicationRecord
   def add_tax_price
     (self.ex_unit_price * 1.08).round
   end
+
+  def taxin_price
+      ex_unit_price*1.1
+  end
+
 end

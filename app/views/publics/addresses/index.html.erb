@@ -1,0 +1,15 @@
+<h5>配送先登録/一覧</h5>
+<%= form_with model: @new_address, local:true do |f| %>
+郵便番号:<%= f.text_field :postal_code %><br>
+住所:<%= f.text_field :address %><br>
+宛名:<%= f.text_field :name %><br>
+<%= f.submit "新規登録" %>
+<% end %>
+
+<% @addresses.each do |address| %>
+<%= address.postal_code %>
+<%= address.address %>
+<%= address.name %>
+<%= link_to "編集する", edit_address_path(address), class:"btn btn-sm btn-success" %>
+<%= link_to "削除する", address_path(address), class:"btn btn-sm btn-danger", method: :delete %>
+<% end %>
