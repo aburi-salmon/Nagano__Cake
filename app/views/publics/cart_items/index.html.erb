@@ -1,0 +1,66 @@
+<div class='container'>
+  <div class='row'>
+    <div class='mx-auto text-center'>
+
+      <h3>ショッピングカート</h3>
+
+      <div>
+        <%= link_to 'カートを空にする', destroy_all_cart_items_path, method: :delete, class:'btn' %>
+      </div>
+
+      <div>
+        <table class='table'>
+          <thead>
+            <tr>
+              <th>商品名</th>
+              <th>単価(税込)</th>
+              <th>数量</th>
+              <th>小計</th>
+              <th></th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @cart_items.each do |cart_item| %>
+            <tr>
+              <td>
+                <%= attachment_image_tag cart_item.product, :image, formmat: 'jpg', fallback: 'logo.png', size:'100x100' %>
+                <%= cart_item.product.name %>
+              </td>
+              <td><%= (cart_item.product.ex_unit_price*1.1).floor %></td>
+              <td>
+                <%= form_for(cart_item) do |f| %>
+                  <%= f.number_field :quantity, min:1, style: 'width: 50%' %>
+                  <%= f.submit '変更', class: 'btn' %>
+                <% end %>
+              </td>
+              <td><%= (cart_item.product.ex_unit_price*1.1).floor * cart_item.quantity %></td>
+              <td><%= link_to '削除する', cart_items_path(cart_item), method: :delete, class: 'btn' %></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+
+      <div>
+        <%= link_to '買い物を続ける', products_path, class: 'btn' %>
+      </div>
+
+      <div>
+        <table>
+          <tbody>
+            <th>合計金額</th>
+            <td><%= @total.round.to_s(:delimited)%>円</td>
+          </tbody>
+        </table>
+      </div>
+
+      <% if current_member.cart_items.present? %>
+        <div>
+          <p>情報入力に進む</p>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>

@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     passwords:     'admins/passwords',
     registrations: 'admins/registrations'
   }
-
+  
   devise_for :members, controllers: {
     sessions:      'publics/sessions',
     passwords:     'publics/passwords',
@@ -15,21 +15,25 @@ Rails.application.routes.draw do
   root to: 'publics/homes#top'
   get 'about' => 'publics/homes#about'
   get 'search' => 'searches#search'
-  get 'members/confirm' => 'publics/members#confirm'
-  patch 'members/withdraw' => 'publics/members#withdraw'
-  delete 'cart_items/destroy_all' => 'cart_items#destroy_all'
+  get 'members/confirm' => 'members#confirm'
+  patch 'menbers/withdraw' => 'members#withdraw'
   post 'orders/confirm' => 'orders#confirm'
   get 'orders/complete' => 'orders#complete'
   resources :members, only: [:edit, :update, :show], module: :publics
   resources :addresses, only: [:index, :create, :edit, :update, :destroy], module: :publics
-  resources :products, only: [:index, :show], module: :publics do
-    resources :cart_items, only: [:index, :create, :destroy, :edit]
+  
+  scope module: :publics do
+    resources :products, only: [:index, :show]
+    resources :cart_items, only: [:index, :create, :destroy, :edit, :update] do
+      collection do
+        delete 'destroy_all'
+      end
+    end 
   end
+  
   resources :orders, only: [:new, :create, :index, :show]
 
- 
   namespace :admins do
-
     resources :members, only: [:index, :edit, :update, :show]
     resources :products, except: [:destroy]
     resources :orders, only: [:show, :update] do

@@ -20,7 +20,7 @@
             <% if member_signed_in? %>
               <li><%= link_to 'マイページ', member_path(current_member) %></li>
               <li><%= link_to '商品一覧', products_path %></li>
-              <li><%= link_to 'カート' %></li>
+              <li><%= link_to 'カート', cart_items_path %></li>
               <li><%= link_to 'ログアウト', destroy_member_session_path, method: :delete %></li>
             <% elsif admin_signed_in? %>
               <li><%= link_to 'ログアウト', destroy_member_session_path, method: :delete %></li>
@@ -31,7 +31,7 @@
               <li><%= link_to 'ログイン', new_member_session_path %></li>
             <% end %>
             </ul>
-          </div>  
+          </div>
         </div>
       </nav>
     </header>
