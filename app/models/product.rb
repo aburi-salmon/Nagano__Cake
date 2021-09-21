@@ -1,5 +1,5 @@
 class Product < ApplicationRecord
-  has_many :genres
+  belongs_to :genre
   has_many :cart_items
   has_many :order_details
   # has_many :member_choice_products, through: :genres, source: :member
