@@ -12,13 +12,14 @@
     <% @members.each do |member| %>
     <tr>
       <td><%= member.id %></td>
-      <td><%=link_to member.last_name + member.first_name, admins_member_path(member.id) %></td>
+      <td><%= link_to member.last_name + member.first_name, admins_member_path(member.id) %></td>
       <td><%= member.email %></td>
-      <td><% if member.is_deleted == true %>
-        無効
-      <% elsif member.is_deleted == false %>
+      <td>
+        <% if member.is_deleted == true %>
+          無効
+        <% elsif member.is_deleted == false %>
         有効
-      <% end %>
+        <% end %>
       </td>
     </tr>
     <% end %>

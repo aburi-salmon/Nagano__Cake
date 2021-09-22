@@ -1,6 +1,7 @@
 class Publics::ProductsController < ApplicationController
   def index
-    @products = Product.page(params[:page])
+    @products = Product.page(params[:page]).order(created_at: :desc).per(8)
+    @product_all = Product.all
     @genres = Genre.all
   end
 

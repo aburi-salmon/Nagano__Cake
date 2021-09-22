@@ -1,40 +1,42 @@
-<h2>商品詳細</h2>
-<table border="1" width="150">
-  <tr align="center">
-    <th>ジャンル検索</th>
-  </tr>
-  <tr>
-    <td>
-      <% @genres.each do |genre| %>
-        <%= genre.name %><br />
-      <% end %>
-    </td>
-  </tr>
-</table>
 <div class='container px-1 px-md-0'>
-<div class='row'>
-    <div class='col-md-4'>
-      <%= attachment_image_tag @product, :image, size: "200x200", fallback: "no_image_logo.png" %>
+  <div class='row'>
+    <div class='col-md-3'>
+      <table border="1" width="150" height="200">
+        <tr align="center">
+          <th>ジャンル検索</th>
+        </tr>
+        <tr>
+          <td>
+            <% @genres.each do |genre| %>
+              <%= genre.name %><br />
+            <% end %>
+          </td>
+        </tr>
+      </table>
     </div>
-    <div class='col-md-4'>
-      <h3>
-        <%= @product.name  %>
-      </h3>
-      <p>
-        <%= @product.description %>
-      </p>
-      <h5>
-        ￥<%= @product.add_tax_price.to_s(:delimited)  %><span style="font-size:10px">（税込）</span>
-      </h5>
-      <%= "個数選択" %>
-      <%= "カートに入れる" %>
+  <div class='col-md-9'>
+    <div class='row'>
+      <div class='col-md-5'>
+        <%= attachment_image_tag @product, :image, size: "280x200", fallback: "logo.png" %>
+      </div>
+      <div class='col-md-6'>
+        <h3>
+          <%= @product.name  %>
+        </h3>
+        <p>
+          <%= @product.description %>
+        </p>
+        <h5>
+          ￥<%= @product.add_tax_price.to_s(:delimited)  %><span style="font-size:13px">（税込）</span>
+        </h5>
+         <%= form_with model: @cart_item, url: cart_items_path do |f| %>
+            <%= f.hidden_field :product_id, :value => @product.id %>
+            <%= f.select :quantity,[["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"], ["5", "5"], ["6", "6"], ["7", "7"], ["8", "8"], ["9", "9"], ["10", "10"]] ,class:"form-control" %>
+            <%= f.submit 'カートに入れる' ,class: 'btn btnprimary' %>
+          <% end %>
+       </div>
     </div>
-      <%= form_for @cart_item, url: cart_items_path do |f| %>
-        <%= f.hidden_field :product_id, :value => @product.id %>
-        <%= f.number_field :quantity, placeholder: '個数選択',class: 'btn btn-default',min: 1 %>
-        <%= f.submit 'カートに入れる' ,class: 'btn btnprimary' %>
-      <% end %>
-  </div>
-
+</div>
+</div>
 </div>
 

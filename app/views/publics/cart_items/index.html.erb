@@ -1,66 +1,69 @@
 <div class='container'>
   <div class='row'>
-    <div class='mx-auto text-center'>
-
-      <h3>ショッピングカート</h3>
-
-      <div>
-        <%= link_to 'カートを空にする', destroy_all_cart_items_path, method: :delete, class:'btn' %>
-      </div>
-
-      <div>
-        <table class='table'>
-          <thead>
-            <tr>
-              <th>商品名</th>
-              <th>単価(税込)</th>
-              <th>数量</th>
-              <th>小計</th>
-              <th></th>
-            </tr>
-          </thead>
-
-          <tbody>
-            <% @cart_items.each do |cart_item| %>
-            <tr>
-              <td>
-                <%= attachment_image_tag cart_item.product, :image, formmat: 'jpg', fallback: 'logo.png', size:'100x100' %>
-                <%= cart_item.product.name %>
-              </td>
-              <td><%= (cart_item.product.ex_unit_price*1.1).floor %></td>
-              <td>
-                <%= form_for(cart_item) do |f| %>
-                  <%= f.number_field :quantity, min:1, style: 'width: 50%' %>
-                  <%= f.submit '変更', class: 'btn' %>
-                <% end %>
-              </td>
-              <td><%= (cart_item.product.ex_unit_price*1.1).floor * cart_item.quantity %></td>
-              <td><%= link_to '削除する', cart_items_path(cart_item), method: :delete, class: 'btn' %></td>
-            </tr>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
-
-      <div>
-        <%= link_to '買い物を続ける', products_path, class: 'btn' %>
-      </div>
-
-      <div>
-        <table>
-          <tbody>
-            <th>合計金額</th>
-            <td><%= @total.round.to_s(:delimited)%>円</td>
-          </tbody>
-        </table>
-      </div>
-
-      <% if current_member.cart_items.present? %>
-        <div>
-          <%= link_to '情報入力に進む', new_order_path, class: 'btn' %>
-        </div>
-      <% end %>
-
+    <div class='col-md-3'>
+    　<h3 class='bg-light'>ショッピングカート</h3>
+    </div>
+    <div class='offset-7 col-2'>
+     <%= link_to 'カートを空にする', destroy_all_cart_items_path, method: :delete, class:'btn btn-danger' %>
     </div>
   </div>
+
+      <div class='row my-3'>
+        <div class='col-md-12'>
+          <table class='table table-bordered'>
+            <thead class='thead-light'>
+              <tr>
+                <th style='width: 40%'>商品名</th>
+                <th style='width: 15%'>単価(税込)</th>
+                <th style='width: 15%'>数量</th>
+                <th style='width: 15%'>小計</th>
+                <th style='width: 15%'></th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <% @cart_items.each do |cart_item| %>
+              <tr>
+                <td class='font-weight-bold'>
+                  <%= attachment_image_tag cart_item.product, :image, formmat: 'jpg', fallback: 'logo.png', size:'70x50' %>
+                  <%= cart_item.product.name %>
+                </td>
+                <td class='font-weight-bold'><%= (cart_item.product.ex_unit_price*1.1).floor %></td>
+                <td>
+                  <%= form_with model: cart_item do |f| %>
+                    <%= f.select :quantity,[["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"], ["5", "5"], ["6", "6"], ["7", "7"], ["8", "8"], ["9", "9"], ["10", "10"]] ,class:"form-control" %>
+                    <%= f.submit '変更', class: 'btn btn-success' %>
+                  <% end %>
+                </td>
+                <td class='font-weight-bold'><%= (cart_item.product.ex_unit_price*1.1).floor * cart_item.quantity %></td>
+                <td><%= link_to '削除する', cart_item_path(cart_item), method: :delete, class: 'btn btn-danger' %></td>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class='row'>
+        <div class='col-md-3'>
+          <%= link_to '買い物を続ける', products_path, class: 'btn btn-primary' %>
+        </div>
+        <div class='offset-4 col-5'>
+          <table class='table table-bordered'>
+            <tbody>
+              <tr>
+                <td class='table-secondary font-weight-bold'>合計金額</td>
+                <td class='font-weight-bold'><%= @total.round.to_s(:delimited)%>円</td>
+              </tr>
+            </tbody>
+        </div>
+        </table>
+      </div>
+     <div class='row mx-auto'>
+        <% if current_member.cart_items.present? %>
+          <div class='mt-4 mx-auto btn btn-success'>
+            <p>情報入力に進む</p>
+          </div>
+        <% end %>
+     </div>
 </div>

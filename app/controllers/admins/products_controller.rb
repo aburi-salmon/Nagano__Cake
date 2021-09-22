@@ -2,6 +2,7 @@ class Admins::ProductsController < ApplicationController
   before_action :set_genres, only:[:index, :new, :show, :edit, :create, :update]
   def index
     @products = Product.page(params[:page])
+
   end
 
   def new
@@ -20,7 +21,6 @@ class Admins::ProductsController < ApplicationController
   def show
     @product = Product.find(params[:id])
     @genre = Genre.find(@product.genre_id)
-    @cart_item = CartItem.new
   end
 
   def update
