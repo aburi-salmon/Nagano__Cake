@@ -1,13 +1,14 @@
 <% if @product.errors.any? %>
   <%= @product.errors.count %>件のエラーが発生しました<br/>
-　商品価格は入力必須です
+  <% @product.errors.full_messages.each do |message| %>
+    <%= message %>
+  <% end %>
 <% end %>
 <h2>商品編集</h2>
 <div class="container">
   <div class="row">
     <%= form_with model: [:admins, @product], local: true do |f| %>
-      <%= attachment_image_tag @product, :image, size: "200x200", fallback: "no_image_logo.png" %>
-      <!--登録済みの画像はどのように表示させるか-->
+      <%= attachment_image_tag @product, :image, size: "200x200", fallback: "logo.png" %>
       <!--画像が登録済みの状態だと編集画面から何も画像を選択せずに登録をおしても登録済みの画像を持ったままになる-->
       <div class="col">
         <%= "商品画像" %>

@@ -12,6 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2021_09_21_021212) do
 
+
   create_table "addresses", force: :cascade do |t|
     t.integer "member_id"
     t.string "postal_code"
@@ -53,10 +54,10 @@ ActiveRecord::Schema.define(version: 2021_09_21_021212) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.string "first_name"
-    t.string "last_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "first_name"
+    t.string "last_name"
     t.string "kana_last_name"
     t.string "kana_first_name"
     t.string "phone_number"
