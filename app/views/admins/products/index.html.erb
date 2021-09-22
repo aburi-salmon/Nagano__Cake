@@ -12,14 +12,13 @@
   <div class='row'>
     <div class='col-md-12'>
       <table class='table table-hover table-inverse'>
-        <thead class='table-striped'>
+        <thead class='table-secondary'>
           <tr>
-            <th>商品ID</th>
-            <th>商品名</th>
-            <th>税抜価格</th>
-            <th>ジャンル</th>
-            <th>ステータス</th>
-            <th colspan="5"></th>
+            <th scope="col-md-1">商品ID</th>
+            <th scope="col-md-4">商品名</th>
+            <th scope="col-md-1">税抜価格</th>
+            <th scope="col-md-4">ジャンル</th>
+            <th scope="col-md-1">ステータス</th>
           </tr>
         </thead>
         <tbody>
@@ -27,7 +26,7 @@
             <tr id="product_<%= product.id %>">
               <td><%= product.id %></td>
               <td><%= link_to product.name, admins_product_path(product.id), class: "product_#{product.id}" %></td>
-              <td><%= product.ex_unit_price %></td>
+              <td><%= product.ex_unit_price.to_s(:delimited) %></td>
               <td><%= product.genre.name %></td>
               <td>
                 <% if product.is_active == true %>
