@@ -13,7 +13,7 @@ class Product < ApplicationRecord
   end
 
   def taxin_price
-      ex_unit_price*1.1
+    ex_unit_price*1.08
   end
 
 end
