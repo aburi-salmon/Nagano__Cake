@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 2021_09_20_020029) do
+ActiveRecord::Schema.define(version: 2021_09_20_062454) do
 
   create_table "addresses", force: :cascade do |t|
     t.integer "member_id"
@@ -33,7 +32,6 @@ ActiveRecord::Schema.define(version: 2021_09_20_020029) do
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
-
 
   create_table "cart_items", force: :cascade do |t|
     t.integer "member_id"
