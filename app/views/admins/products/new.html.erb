@@ -1,39 +1,65 @@
 <% if @product.errors.any? %>
   <%= @product.errors.count %>件のエラーが発生しました<br/>
-　商品価格は入力必須です
+  <% @product.errors.full_messages.each do |message| %>
+    <%= message %>
+  <% end %>
 <% end %>
-<h2>商品新規登録</h2>
+<h5 class="offset-md-2" >商品新規登録</h5><br />
 <div class="container">
-  <div class="row">
-    <%= form_with model: [:admins, @product], local: true do |f| %>
-      <div class="col">
-        <%= "商品画像" %>
-        <%= f.attachment_field :image %>
-      </div>
-      <div class="col">
-        <%= "商品名" %>
-        <%= f.text_field :name,placeholder: "商品名" %>
-      </div>
-      <div class="col">
-        <%= "商品説明" %>
-        <%= f.text_area :description,placeholder: "ここに説明文を記述します" %>
-      </div>
-      <div class="col">
-        <%= "ジャンル" %>
-        <%= f.collection_select :genre_id, @genres, :id, :name, include_blank: "--選択してください--" %>
-      </div>
-      <div class="col">
-        <%= "税抜価格" %>
-        <%= f.text_field :ex_unit_price,placeholder: "1000" %><%= "円" %>
-      </div>
-      <div class="col">
-        <%= "販売ステータス" %>
-        <%= f.radio_button :is_active,true, checked: true %>
-        <%= f.label :is_active, '販売中', value: true %>
-        <%= f.radio_button :is_active,false %>
-        <%= f.label :is_active, '販売停止中', value: false %>
-      </div>
-        <%= f.submit "新規登録", class: 'btn btn-success' %>
-    <% end %>
+  <%= form_with model: [:admins, @product], local: true do |f| %>
+  <div class="row offset-md-2 mb-2">
+    <div class="col-md-2">
+      <%= "商品画像" %>
+    </div>
+    <div class="col">
+      <%= f.attachment_field :image %>
+    </div>
   </div>
+  <div class="row offset-md-2 mb-2">
+    <div class="col-md-2">
+      <%= "商品名" %>
+    </div>
+    <div class="col">
+      <%= f.text_field :name,placeholder: "商品名", size: "40" %>
+    </div>
+  </div>
+  <div class="row offset-md-2 mb-2">
+    <div class="col-md-2">
+      <%= "商品説明" %>
+    </div>
+    <div class="col">
+      <%= f.text_area :description,placeholder: "ここに説明文を記述します", size: "40x8" %>
+    </div>
+  </div>
+  <div class="row offset-md-2 mb-2">
+    <div class="col-md-2">
+      <%= "ジャンル" %>
+    </div>
+    <div class="col">
+      <%= f.collection_select :genre_id, @genres, :id, :name, include_blank: "--選択してください--" %>
+    </div>
+  </div>
+  <div class="row offset-md-2 mb-2">
+    <div class="col-md-2">
+      <%= "税抜価格" %>
+    </div>
+    <div class="col">
+      <%= f.text_field :ex_unit_price,placeholder: "1000", size: "40" %><%= "円" %>
+    </div>
+  </div>
+  <div class="row offset-md-2 mb-3">
+    <div class="col-md-2">
+      <%= "販売ステータス" %>
+    </div>
+    <div class="col-md-8">
+      <%= f.radio_button :is_active,true, checked: true %>
+      <%= f.label :is_active, '販売中', value: true %>
+      <%= f.radio_button :is_active,false %>
+      <%= f.label :is_active, '販売停止中', value: false %>
+    </div>
+  </div>
+  <div class="text-center">
+    <%= f.submit "新規登録", class: 'btn btn-success btn-lg' %>
+  </div>
+    <% end %>
 </div>

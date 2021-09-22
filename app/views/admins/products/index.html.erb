@@ -1,33 +1,47 @@
-<h2>商品一覧</h2>
-<%= link_to "+", new_admins_product_path %>
-<table class='table table-hover table-inverse'>
-  <thead class='table-striped'>
-    <tr>
-      <th>商品ID</th>
-      <th>商品名</th>
-      <th>税抜価格</th>
-      <th>ジャンル</th>
-      <th>ステータス</th>
-      <th colspan="5"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @products.each do |product| %>
-      <tr id="product_<%= product.id %>">
-        <td><%= product.id %></td>
-        <td><%= link_to product.name, admins_product_path(product.id), class: "product_#{product.id}" %></td>
-        <td><%= product.ex_unit_price %></td>
-        <td><%= @genres.name %></td>
-        <!--ジャンル名を表示させたいのにジャンル表示される-->
-        <td>
-          <% if product.is_active == true %>
-            <p>販売中</p>
-          <% elsif product.is_active == false %>
-            <p>販売停止中</p>
+<div class='container'>
+  <div class='row mb-4'>
+    <div class='col-md-8'>
+      <h5 class="offset-md-1">商品一覧</h5>
+    </div>
+    <div class='offset-md-3 text-right'>
+      <button type="button" class="btn btn-light rounded-circle p-0" style="width:2rem;height:2rem;">
+        <%= link_to "+", new_admins_product_path ,class: "text-secondary h4"%>
+      </button>
+    </div>
+  </div>
+  <div class='row'>
+    <div class='col-md-12'>
+      <table class='table table-hover table-inverse'>
+        <thead class='table-secondary'>
+          <tr>
+            <th scope="col-md-1">商品ID</th>
+            <th scope="col-md-4">商品名</th>
+            <th scope="col-md-1">税抜価格</th>
+            <th scope="col-md-4">ジャンル</th>
+            <th scope="col-md-1">ステータス</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @products.each do |product| %>
+            <tr id="product_<%= product.id %>">
+              <td><%= product.id %></td>
+              <td><%= link_to product.name, admins_product_path(product.id), class: "product_#{product.id}" %></td>
+              <td><%= product.ex_unit_price.to_s(:delimited) %></td>
+              <td><%= product.genre.name %></td>
+              <td>
+                <% if product.is_active == true %>
+                  <p class="text-success font-weight-bold">販売中</p>
+                <% elsif product.is_active == false %>
+                  <p class="text-secondary font-weight-bold">販売停止中</p>
+                <% end %>
+              </td>
+            </tr>
           <% end %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-<%= paginate @products %>
+        </tbody>
+      </table>
+      <ul class="pagination justify-content-center">
+        <%= paginate @products %>
+      </ul>
+    </div>
+  </div>
+</div>
