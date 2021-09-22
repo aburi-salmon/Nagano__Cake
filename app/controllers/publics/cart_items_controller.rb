@@ -1,6 +1,6 @@
 class Publics::CartItemsController < ApplicationController
 
-  #before_action :authenticate_customer!
+  before_action :authenticate_member!
 
   def index
     @cart_items = current_member.cart_items
@@ -10,13 +10,21 @@ class Publics::CartItemsController < ApplicationController
   def create
     @cart_item = CartItem.new(cart_item_params)
     @cart_item.member_id = current_member.id
+    @cart_items = current_member.cart_items.all
+    @cart_items.each do |cart_item|
+      if cart_item.product_id == @cart_item.product_id
+         new_quantity = cart_item.quantity + @cart_item.quantity
+         cart_item.update_attribute(:quantity, new_quantity)
+         @cart_item.delete
+      end
+    end
     @cart_item.save
     redirect_to cart_items_path
   end
 
   def update
-    @cart_items = CartItem.find(params[:id])
-    @cart_items.update(cart_item_params)
+    @cart_item = CartItem.find(params[:id])
+    @cart_item.update(cart_item_params)
     redirect_to cart_items_path
   end
 
@@ -40,4 +48,3 @@ class Publics::CartItemsController < ApplicationController
   end
 
 end
-

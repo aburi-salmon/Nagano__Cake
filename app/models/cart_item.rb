@@ -7,4 +7,9 @@ class CartItem < ApplicationRecord
     product.taxin_price * quantity
   end
 
+  with_options presence: true do
+    validates :member_id
+    validates :product_id
+    validates :quantity
+  end 
 end
