@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+
   devise_for :admins, controllers: {
     sessions:      'admins/sessions',
     passwords:     'admins/passwords',
@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   get 'orders/complete' => 'publics/orders#complete'
   resources :members, only: [:edit, :update, :show], module: :publics
   resources :addresses, only: [:index, :create, :edit, :update, :destroy], module: :publics
-  
+
   scope module: :publics do
     resources :products, only: [:index, :show]
     resources :cart_items, only: [:index, :create, :destroy, :edit, :update] do
@@ -34,6 +34,7 @@ Rails.application.routes.draw do
   resources :orders, only: [:new, :create, :index, :show], module: :publics
 
   namespace :admins do
+    root to: 'homes#top'
     resources :members, only: [:index, :edit, :update, :show]
     resources :products, except: [:destroy]
     resources :orders, only: [:show, :update] do
