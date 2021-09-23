@@ -13,7 +13,11 @@ class Product < ApplicationRecord
   end
 
   def taxin_price
-      ex_unit_price*1.1
+    ex_unit_price*1.08
   end
 
+  def self.search(keyword)
+  where(["name like?", "%#{keyword}%"])
+  end
+  
 end

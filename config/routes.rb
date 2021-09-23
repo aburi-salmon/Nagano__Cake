@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+
   devise_for :admins, controllers: {
     sessions:      'admins/sessions',
     passwords:     'admins/passwords',
@@ -15,13 +15,11 @@ Rails.application.routes.draw do
   root to: 'publics/homes#top'
   get 'about' => 'publics/homes#about'
   get 'search' => 'searches#search'
-  get 'members/confirm' => 'publics/members#confirm'
-  patch 'members/withdraw' => 'publics/members#withdraw'
-  post 'orders/confirm' => 'publics/orders#confirm'
-  get 'orders/complete' => 'publics/orders#complete'
+  get 'members/confirm' => 'members#confirm'
+  patch 'menbers/withdraw' => 'members#withdraw'
   resources :members, only: [:edit, :update, :show], module: :publics
   resources :addresses, only: [:index, :create, :edit, :update, :destroy], module: :publics
-  
+
   scope module: :publics do
     resources :products, only: [:index, :show]
     resources :cart_items, only: [:index, :create, :destroy, :edit, :update] do
@@ -31,9 +29,15 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :orders, only: [:new, :create, :index, :show], module: :publics
+  resources :orders, only: [:new, :create, :index, :show], module: :publics do
+    collection do
+      post :confirm
+      get :complete
+    end
+  end
 
   namespace :admins do
+    root to: 'homes#top'
     resources :members, only: [:index, :edit, :update, :show]
     resources :products, except: [:destroy]
     resources :orders, only: [:show, :update] do

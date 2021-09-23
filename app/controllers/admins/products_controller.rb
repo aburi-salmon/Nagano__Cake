@@ -2,7 +2,6 @@ class Admins::ProductsController < ApplicationController
   before_action :set_genres, only:[:index, :new, :show, :edit, :create, :update]
   def index
     @products = Product.page(params[:page])
-
   end
 
   def new
