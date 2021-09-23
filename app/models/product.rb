@@ -16,4 +16,8 @@ class Product < ApplicationRecord
       ex_unit_price*1.1
   end
 
+  def self.search(keyword)
+  where(["name like?", "%#{keyword}%"])
+  end
+  
 end
