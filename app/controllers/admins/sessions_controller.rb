@@ -1,7 +1,17 @@
 # frozen_string_literal: true
 
 class Admins::SessionsController < Devise::SessionsController
-  # before_action :configure_sign_in_params, only: [:create]
+  before_action :configure_sign_in_params, only: [:create]
+  
+  def create
+    @user = login(params[:email], params[:password])
+    if @user
+      redirect_back_or_to root_path, success: t('ようこそ')
+    else
+      flash[:danger] = 'ログインに失敗しました'
+      render :new
+    end
+  end
 
   # GET /resource/sign_in
   # def new
