@@ -40,12 +40,6 @@
           </ul>
         </div>
       </div>
-      <div>
-        <%= form_with url:search_path, method: :get, local: true do |f| %>
-          <%= f.text_field :keyword, value: @keyword %>
-          <%= f.submit :"検索" %>
-        <% end %>
-      </div>
     </nav>
   </header>
   <main>
