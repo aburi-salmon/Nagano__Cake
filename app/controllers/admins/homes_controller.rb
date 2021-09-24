@@ -1,9 +1,8 @@
 class Admins::HomesController < ApplicationController
 
   def top
-  end
-
-  def about
+    @orders = Order.all
+    #@quantity = CartItem.where(params[:member_id]).sum(:quantity)
   end
 
 end

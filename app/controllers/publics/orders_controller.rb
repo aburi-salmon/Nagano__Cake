@@ -33,7 +33,14 @@ class Publics::OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
     @order.save
-    current_member.cart_items.destroy_all
+    @order_detail = @order.order_details.build
+    current_member.cart_items.each do |cart_item|
+      @order_detail.order_id = @order.id
+      @order_detail.product_id = cart_item.product_id
+      @order_detail.quantity = cart_item.quantity
+      @order_detail.price = cart_item.product.add_tax_price
+    end
+    @order_detail.save
     redirect_to complete_orders_path
   end
 

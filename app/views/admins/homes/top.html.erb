@@ -1,1 +1,29 @@
-admin
+<h3>注文履歴一覧</h3>
+<table>
+  <thead>
+    <tr>
+      <th>購入日時</th>
+      <th>購入者</th>
+      <th>注文個数</th>
+      <th>注文ステータス</th>
+    </tr>
+  </thead>
+  <% @orders.each do |order| %>
+  <tbody>
+    <tr>
+      <td>
+        <%= link_to admins_order_path(order) do %>
+          <%= order.created_at.strftime('%Y/%m/%d %H:%M:%S') %>
+        <% end %>
+      </td>
+      <td><%= order.member.last_name %><%= order.member.first_name %></td>
+      <% count = 0 %>
+      <% order.order_details.each do | order_detail|  %>
+      <% count += order_detail.quantity %>
+      <% end %>
+      <td><%= count %></td>
+      <td><%= order.status %></td>
+    </tr>
+  </tbody>
+  <% end %>
+</table>
