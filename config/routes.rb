@@ -15,8 +15,8 @@ Rails.application.routes.draw do
   root to: 'publics/homes#top'
   get 'about' => 'publics/homes#about'
   get 'search' => 'searches#search'
-  get 'members/confirm' => 'members#confirm'
-  patch 'members/withdraw' => 'members#withdraw'
+  get 'members/confirm' => 'publics/members#confirm'
+  patch 'members/withdraw' => 'publics/members#withdraw'
   resources :members, only: [:edit, :update, :show], module: :publics
   resources :addresses, only: [:index, :create, :edit, :update, :destroy], module: :publics
 

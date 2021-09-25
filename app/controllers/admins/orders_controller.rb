@@ -3,18 +3,38 @@ class Admins::OrdersController < ApplicationController
   def show
     @order = Order.find(params[:id])
     @order_details = @order.order_details
-    @orders = Order.where(member_id: @order.member.id)
-    @all_price = @order_details.sum(:price)
-    @all_quantity = @order_details.sum(:quantity)
-    @total = @all_price * @all_quantity
+    @total = 0
+    @order_details.each do |order_detail|
+      @mini_total = 0
+      @price = order_detail.price
+      @quantity = order_detail.quantity
+      @mini_total = @price * @quantity
+      @total += @mini_total
+    end
+    @total_price = @total
+    # @orders = Order.where(member_id: @order.member.id)
+    # @all_price = @order_details.sum(:price)
+    # @all_quantity = @order_details.sum(:quantity)
+    # @total = @all_price * @all_quantity
     @delivery_cost = 800
-    @charge = @total + @delivery_cost
+    @charge = @total_price + @delivery_cost
   end
 
   def update
     @order = Order.find(params[:id])
-    @order.update(order_params)
-    redirect_to admins_order_path(@order)
+    @order_details = @order.order_details
+    if @order.update(order_params)
+      @order.order_details.update(production_status: "製作待ち") if @order.status == "入金確認"
+      redirect_to request.referer
+    elsif @order.order_details.update(order_params)
+      @order.update(status: "製作中") if @order.order_details.production_status == "製作中"
+      redirect_to request.referer
+    elsif @order.order_details.update(order_params)
+      @order.update(status: "発送準備中") if @order.order_details.production_status == "製作完了"
+      redirect_to request.referer
+    else
+      redirect_to request.referer
+    end
   end
 
   private

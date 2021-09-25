@@ -1,4 +1,4 @@
-Admins.create!(
+Admin.create!(
    email: 'admins@admin',
    password: '111111'
 )

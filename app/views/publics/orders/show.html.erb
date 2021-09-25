@@ -35,7 +35,7 @@
         <tbody class='thead-light'>
           <tr>
             <th>商品合計</th>
-            <td class='font-weight-bold'><%= @total.round.to_s(:delimited) %></td>
+            <td class='font-weight-bold'><%= (@order.charge - @delivery_cost).round.to_s(:delimited) %></td>
           </tr>
           <tr>
             <th>配送料</th>
@@ -43,7 +43,7 @@
           </tr>
           <tr>
             <th>ご請求額</th>
-            <td class='font-weight-bold'><%= @charge.round %></td>
+            <td class='font-weight-bold'><%= @charge.round.to_s(:delimited) %></td>
           </tr>
         </tbody>
       </table>
@@ -62,13 +62,13 @@
             <th style='width: 15%'>小計</th>
           </tr>
         </thead>
-        <% @cart_items.each do |cart_item| %>
+        <% @order_details.each do |order_detail| %>
         <tbody>
           <tr>
-            <td class='font-weight-bold'><%= cart_item.product.name %></td>
-            <td class='font-weight-bold'><%= (cart_item.product.ex_unit_price*1.08).floor %></td>
-            <td class='font-weight-bold'><%= cart_item.quantity %></td>
-            <td class='font-weight-bold'><%= (cart_item.product.ex_unit_price*1.08).floor * cart_item.quantity %></td>
+            <td class='font-weight-bold'><%= order_detail.product.name %></td>
+            <td class='font-weight-bold'><%= ((order_detail.price).floor).to_s(:delimited) %></td>
+            <td class='font-weight-bold'><%= order_detail.quantity %></td>
+            <td class='font-weight-bold'><%= (order_detail.price.floor * order_detail.quantity).to_s(:delimited) %></td>
           </tr>
         </tbody>
         <% end %>
