@@ -26,12 +26,6 @@ class Admins::OrdersController < ApplicationController
     if @order.update(order_params)
       @order.order_details.update(production_status: "製作待ち") if @order.status == "入金確認"
       redirect_to request.referer
-    elsif @order.order_details.update(order_params)
-      @order.update(status: "製作中") if @order.order_details.production_status == "製作中"
-      redirect_to request.referer
-    elsif @order.order_details.update(order_params)
-      @order.update(status: "発送準備中") if @order.order_details.production_status == "製作完了"
-      redirect_to request.referer
     else
       redirect_to request.referer
     end
