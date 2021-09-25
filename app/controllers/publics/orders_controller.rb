@@ -66,11 +66,7 @@ class Publics::OrdersController < ApplicationController
   def show
     @order = Order.find(params[:id])
     @order_details = @order.order_details
-    @all_price = @order_details.sum(:price)
-    @all_quantity = @order_details.sum(:quantity)
-    @total = @all_price * @all_quantity
     @delivery_cost = 800
-    @charge = @total + @delivery_cost
   end
 
   private
