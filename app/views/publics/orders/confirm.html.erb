@@ -1,8 +1,8 @@
-<div class="container"> 
+<div class="container">
   <div class="row my-4">
     <h5 class="bg-light">注文情報確認</h5>
   </div>
-  
+
   <div class="row">
     <div class="col">
       <table class="table table-borderd">
@@ -21,16 +21,16 @@
               <%= attachment_image_tag cart_item.product, :image, size: "40x40", fallback: "logo.png" %>
               <%= cart_item.product.name %>
             </td>
-            <td><%= (cart_item.product.ex_unit_price*1.08).floor %></td>
+            <td><%= ((cart_item.product.ex_unit_price*1.08).floor).to_s(:delimited) %></td>
             <td><%= cart_item.quantity %></td>
-            <td><%= (cart_item.product.ex_unit_price*1.08).floor * cart_item.quantity %></td>
+            <td><%= ((cart_item.product.ex_unit_price*1.08).floor * cart_item.quantity).to_s(:delimited) %></td>
           </tr>
         </tbody>
-      <% end %> 
+      <% end %>
       </table>
-    </div> 
-  </div>  
-      
+    </div>
+  </div>
+
   <div class="row">
     <div class="col-md-4">
       <table class="table table-borderd">
@@ -50,8 +50,8 @@
       </thead>
       </table>
     </div>
-    
-    
+
+
     <div class="col-md-7 offset-md-1 my-4">
       <table>
         <thead>
@@ -69,11 +69,11 @@
       </table>
     </div>
   </div>
-    
+
     <div class="text-center">
     <%= form_with model: @order, local:true do |f| %>
       <%= f.hidden_field :member_id, value: current_member.id %>
-      <%= f.hidden_field :charge, value: @charge.round.to_s(:delimited) %>
+      <%= f.hidden_field :charge, value: @charge %>
       <%= f.hidden_field :delivery_cost, value: @delivery_cost %>
       <%= f.hidden_field :status, value: "入金待ち" %>
       <%= f.hidden_field :payment_method, value: @order.payment_method %>
@@ -83,5 +83,5 @@
       <%= f.submit "注文を確定する",class: "btn btn-success" %>
     <% end %>
     </div>
-  
-</div> 
+
+</div>

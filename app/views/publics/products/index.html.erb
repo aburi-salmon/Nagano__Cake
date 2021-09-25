@@ -25,7 +25,9 @@
       <div class='row'>
         <% @products.each do |product| %>
           <div class='col-md-3'>
-            <p><%= attachment_image_tag product, :image, size: "270x200", fallback: "logo.png" %></p>
+            <%= link_to product_path(product.id), class: "product_#{product.id}" do %>
+              <p><%= attachment_image_tag product, :image, size: "270x200", fallback: "logo.png" %></p>
+            <% end %>
             <p><%= link_to product.name, product_path(product.id), class: "product_#{product.id}" %></p>
             <p>¥<%= product.add_tax_price.to_s(:delimited) %></p>
           </div>

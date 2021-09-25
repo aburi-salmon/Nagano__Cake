@@ -14,7 +14,7 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDropdown" aria-controls="navbarTogglerDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <a class="navbar-brand" href="#">Nagano Cake</a>
+        <a class="navbar-brand" href="/">Nagano Cake</a>
         <% if member_signed_in? %>
         <a>ようこそ、<%= current_member.last_name %>さん!!</a>
         <% end %>
@@ -30,7 +30,7 @@
               <li><%= link_to '会員一覧', admins_members_path,class: 'nav-link active' %></li>
               <li><%= link_to '注文履歴一覧', admins_root_path,class: 'nav-link active' %></li>
               <li><%= link_to 'ジャンル一覧', admins_genres_path,class: 'nav-link active' %></li>
-              <li><%= link_to 'ログアウト', destroy_member_session_path,class: 'nav-link active', method: :delete %></li>
+              <li><%= link_to 'ログアウト', destroy_admin_session_path,class: 'nav-link active', method: :delete %></li>
             <% else %>
               <li><%= link_to 'About', about_path,class: 'nav-link active' %></li>
               <li><%= link_to '商品一覧', products_path,class: 'nav-link active' %></li>
