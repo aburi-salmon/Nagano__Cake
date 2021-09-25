@@ -2,7 +2,7 @@
 
 class Publics::SessionsController < Devise::SessionsController
   before_action :configure_sign_in_params, only: [:create, :is_deleted]
-  
+
   def reject_inactive_member
     @member = Member.find_by(email: params[:member][:email])
     if @member
@@ -28,6 +28,7 @@ class Publics::SessionsController < Devise::SessionsController
   # end
 
   # protected
+
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_in_params
