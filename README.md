@@ -26,3 +26,33 @@ DMM WEBCAMPのチーム開発課題です。
 ・商品新規登録/編集機能  
 ・ジャンル一覧表示機能  
 ・ジャンル新規登録/編集機能  
+
+# 環境
+・Ruby2.6.3  
+・Rails5.2.5  
+・HTML5  
+・CSS  
+
+# gem
+・devise  
+・bootstrap4.5  
+・font-awesome-sass5.13  
+・refile/refile-mini_magic  
+・jquery-rails  
+・kaminari1.2.1  
+・pry-byebug  
+
+# 設計図関連
+・[ER図]（https://drive.google.com/file/d/1NUtu49GIg5Fi6fnEXJTD0wutMAZKXZAO/view?usp=sharing）  
+・[テーブル定義書]（https://docs.google.com/spreadsheets/d/1iI1Z--4Ryfdnb1d4eWnt2wxaDUfUne4N/edit?usp=sharing&ouid=109516876002470308988&rtpof=true&sd=true）  
+・[アプリケーション詳細設計書]（https://docs.google.com/spreadsheets/d/1j2bc1VdTOMAyzHtm5G_Hi9GiUXMu2HD3qKwo11ong6Q/edit?usp=sharing）  
+
+# 管理者側ログイン情報
+管理者mail：admins@admin  
+管理者パスワード：111111  
+
+# 開発メンバー
+・やっさん  
+・はち  
+・ぐす  
+・さわてぃ  
