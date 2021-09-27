@@ -43,9 +43,9 @@ DMM WEBCAMPのチーム開発課題です。
 ・pry-byebug  
 
 # 設計図関連
-・[ER図]（https://drive.google.com/file/d/1NUtu49GIg5Fi6fnEXJTD0wutMAZKXZAO/view?usp=sharing）  
-・[テーブル定義書]（https://docs.google.com/spreadsheets/d/1iI1Z--4Ryfdnb1d4eWnt2wxaDUfUne4N/edit?usp=sharing&ouid=109516876002470308988&rtpof=true&sd=true）  
-・[アプリケーション詳細設計書]（https://docs.google.com/spreadsheets/d/1j2bc1VdTOMAyzHtm5G_Hi9GiUXMu2HD3qKwo11ong6Q/edit?usp=sharing）  
+・[ER図](https://drive.google.com/file/d/1NUtu49GIg5Fi6fnEXJTD0wutMAZKXZAO/view?usp=sharing)  
+・[テーブル定義書](https://docs.google.com/spreadsheets/d/1iI1Z--4Ryfdnb1d4eWnt2wxaDUfUne4N/edit?usp=sharing&ouid=109516876002470308988&rtpof=true&sd=true)  
+・[アプリケーション詳細設計書](https://docs.google.com/spreadsheets/d/1j2bc1VdTOMAyzHtm5G_Hi9GiUXMu2HD3qKwo11ong6Q/edit?usp=sharing)  
 
 # 管理者側ログイン情報
 管理者mail：admins@admin  
