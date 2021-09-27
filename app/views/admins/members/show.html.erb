@@ -1,0 +1,88 @@
+<div class="container">
+  <div class='row my-4'>
+    <h5 class="bg-light text-center">
+      <%= @member.last_name %><%= @member.first_name %>さんの会員詳細
+    </h5>
+  </div>
+  <div class='row'>
+    <div class='col-md-8'>
+      <div class='row'>
+        <div class='col-md-3 mb-4'>
+          <%= "会員ID" %>
+        </div>
+        <div class='col-md-0'>
+          <%= @member.id %>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='col-md-3 mb-4'>
+          <%= "氏名" %>
+        </div>
+        <div class='col-md-0'>
+          <%= @member.last_name %>　<%= @member.first_name %>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='col-md-3 mb-4'>
+          <%= "フリガナ" %>
+        </div>
+        <div class='col-md-0'>
+          <%= @member.kana_last_name %>　<%= @member.kana_first_name %>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='col-md-3 mb-4'>
+          <%= "郵便番号" %>
+        </div>
+        <div class='col-md-0'>
+          <%= @member. postal_code %>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='col-md-3 mb-4'>
+          <%= "住所" %>
+        </div>
+        <div class='col-md-0'>
+          <%= @member.address %>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='col-md-3 mb-4'>
+          <%= "電話番号" %>
+        </div>
+        <div class='col-md-0'>
+          <%= @member.phone_number %>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='col-md-3 mb-4'>
+          <%= "メールアドレス" %>
+        </div>
+        <div class='col-md-0'>
+          <%= @member.email %>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='col-md-3 mb-4'>
+          <%= "会員ステータス" %>
+        </div>
+        <div class='col-md-0'>
+          <% if @member.is_deleted == true %>
+            <p class="text-secondary font-weight-bold">退会</p>
+          <% elsif @member.is_deleted == false %>
+            <p class="text-success font-weight-bold">有効</p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class='row'>
+      <div class='col-2'></div>
+    <div class='col-3'>
+      <%= link_to "編集する", edit_admins_member_path(@member.id), class: 'btn btn-success' %>
+    </div>
+    <div class='col'>
+      <%= link_to "注文履歴一覧を見る", admins_root_path, class: 'btn btn-primary' %>
+    </div>
+  </div>
+</div>
